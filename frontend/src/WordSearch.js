@@ -6,13 +6,14 @@ function WordSearch() {
   const [newWord, setNewWord] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [addStatus, setAddStatus] = useState("");
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!word.trim()) return;
     setMessage("Searching...");
     try {
-      const res = await fetch(`http://localhost:3000/get/${word}`);
+      const res = await fetch(`${apiUrl}/${word}`);
       if (res.ok) {
         const data = await res.json();
         setMessage(data);
@@ -29,7 +30,7 @@ function WordSearch() {
     if (!newWord.trim() || !newMessage.trim()) return;
     setAddStatus("Adding...");
     try {
-      const res = await fetch("http://localhost:3000/send", {
+      const res = await fetch(`${apiUrl}/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ word: newWord, message: newMessage }),

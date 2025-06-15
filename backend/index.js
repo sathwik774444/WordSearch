@@ -14,7 +14,8 @@ app.get('/' , (req , res)=>{
     res.send({message : "This is message from back end"});
 });
 
-app.listen(process.env.port , ()=>{
-    console.log(`server started at localhost:${process.env.port}`);
-}
-);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`server started at localhost:${PORT}`);
+});
